@@ -1,0 +1,44 @@
+<h1>Mat-Card</h1>
+
+<p>Card contains title-group, content, actions</p>
+<mat-card class="post-tile">
+  <!-- mat-card-title-group-->
+  <mat-card-title-group>
+    <!-- mat-card-title & mat-card-subtitle-->
+    <mat-card-title>title</mat-card-title>
+    <mat-card-subtitle>subtitle</mat-card-subtitle>
+    <img mat-card-sm-image src="https://picsum.photos/300/500/?random" />
+  </mat-card-title-group>
+  <!-- mat-card-content -->
+  <mat-card-content>mat-card-content</mat-card-content>
+  <!-- mat-card-actions -->
+  <mat-card-actions>
+    <button mat-raised-button color="warn">Read</button>
+  </mat-card-actions>
+  <mat-card-footer>mat-card-footer</mat-card-footer>
+</mat-card>
+
+<h1>Layout of Card without card-title-group</h1>
+<!--   
+  .post-tile {
+  align-self: flex-start;
+  width: 100%;
+  margin: 5px;
+}  
+-->
+<mat-card class="post-tile">
+  <mat-card-title>mat-card-title
+  </mat-card-title>
+  <mat-card-subtitle>mat-card-subtitle</mat-card-subtitle>
+
+  <img mat-card-avatar src="https://picsum.photos/300/400/?random" />
+  <img mat-card-image src="https://picsum.photos/300/300/?random" />
+
+  <mat-card-content>mat-card-content</mat-card-content>
+
+  <mat-card-actions fxLayout="column" fxLayoutGap="10">
+    <button mat-raised-button color="accent">mat-card-actions3</button>
+  </mat-card-actions>
+
+  <mat-card-footer>mat-card-footer</mat-card-footer>
+</mat-card>

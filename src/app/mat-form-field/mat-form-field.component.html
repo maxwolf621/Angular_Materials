@@ -1,0 +1,155 @@
+<h1>mat-form-field</h1>
+
+<p>mat-hint : hint</p>
+<p>mat-input : directive</p>
+<p>mat-error : custom error displahy with interface ErrorStateMatcher</p>
+<p>matTextareaAutosize : auto size the text area</p>
+<p>mat-autocomplete</p>
+
+<h4>type</h4>
+<p>
+  date, datetime-local, month, week ,number,
+  email,password,search,tel,text,time,url
+</p>
+
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <mat-form-field>
+    <input type="date" matInput placeholder="type=date" />
+    <mat-hint> mat-hint : hints</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="search" matInput placeholder="type=search" />
+  </mat-form-field>
+  <mat-form-field>
+    <input type="month" matInput placeholder="type=month" />
+  </mat-form-field>
+  <mat-form-field>
+    <input type="datetime-local" matInput placeholder="type=datime-local" />
+  </mat-form-field>
+  <mat-form-field>
+    <input type="url" matInput placeholder="type=url" />
+  </mat-form-field>
+  <mat-form-field>
+    <input type="password" matInput placeholder="type=password" />
+  </mat-form-field>
+  <mat-form-field>
+    <input type="email" matInput placeholder="type=email" />
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" matInput placeholder="type=number" />
+  </mat-form-field>
+
+  <!-- mat-placeholder & floatLabel & hideReqireMarker-->
+  <mat-form-field floatLabel="auto" [hideRequiredMarker]="true">
+    <input name="name" matInput required />
+    <mat-placeholder>
+      <mat-icon>person</mat-icon>
+      Name
+    </mat-placeholder>
+  </mat-form-field>
+</div>
+
+<p>formGroup contains multiple formControl</p>
+<form
+  [formGroup]="surveyForm"
+  (ngSubmit)="onSubmit()"
+  fxLayout="column"
+  fxLayoutAlign="space-between start"
+>
+  <mat-form-field>
+    <textarea
+      name="intro_self"
+      matInput
+      placeholder="Introduction"
+      formControlName="intro"
+      required
+      matTextareaAutosize
+    ></textarea>
+    <mat-hint>describe yourself briefly~</mat-hint>
+    <mat-error *ngIf="surveyForm.get('intro').hasError('required')"
+      >Dont forget intrduce youself</mat-error
+    >
+    <mat-error *ngIf="surveyForm.get('intro').hasError('minlength')"
+      >Yo at least 10 words bro！</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field color="accent">
+    <input
+      type="text"
+      name="country"
+      placeholder="Country"
+      matInput
+      formControlName="country"
+    />
+  </mat-form-field>
+
+  <!--[matAutoComplete="countries" bind to #countries="matAutoComplete"]-->
+  <mat-autocomplete #countries="matAutocomplete">
+    <mat-option
+      *ngFor="let country of countries$ | async"
+      [value]="country.name"
+    >
+      {{ country.name }}
+    </mat-option>
+  </mat-autocomplete>
+
+  <!-- usage of mat-opt-group -->
+  <mat-form-field>
+    <input
+      type="text"
+      name="majorTech"
+      matInput
+      placeholder="Skill"
+      formControlName="majorTech"
+      [matAutocomplete]="majorTechs"
+    />
+  </mat-form-field>
+
+  <mat-autocomplete #majorTechs="matAutocomplete">
+    <mat-optgroup
+      *ngFor="let techList of majorTechList"
+      [label]="techList.name"
+    >
+      <!-- pass value -->
+      <mat-option *ngFor="let tech of techList.items" [value]="tech">
+        {{ tech }}
+      </mat-option>
+    </mat-optgroup>
+  </mat-autocomplete>
+
+  <!-- mat-select & mat-option with [disabled]="index === 1"-->
+  <!-- with mat-select multiple -->
+  <mat-form-field>
+    <mat-select formControlName="interest" placeholder="Interest" multiple>
+      <mat-option
+        *ngFor="let item of interestList; let index = index"
+        [value]="item.id"
+        [disabled]="index === 1"
+        >{{ item.name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
+  <!-- mat-select & mat-option with [value]="undefined"-->
+  <mat-form-field>
+    <mat-select formControlName="interest" placeholder="Interest">
+      <mat-option [value]="undefined">Reset Selection</mat-option>
+      <mat-option
+        *ngFor="let item of interestList; let index = index"
+        [value]="item.id"
+        >{{ item.name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<p>*ngIf = formGroupValye.get('formControlName').hasError('Condition')</p>
+<p>variable of forGroup is observable</p>
+
+<h2>matSuffix & matPrefix</h2>
+
+<mat-form-field>
+  <input type="number" matInput placeholder="Your Average Cost Per Day" />
+  <mat-icon matPrefix>attach_money</mat-icon>
+  <span matSuffix>USD</span>
+</mat-form-field>

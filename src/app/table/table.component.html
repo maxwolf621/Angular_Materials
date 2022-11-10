@@ -1,0 +1,111 @@
+<!--
+Tables with display: flex approach 
+replaces the native table element tags with the MatTable directive selectors. 
+
+For example, 
+  <table mat-table> becomes <mat-table>; 
+  <tr mat-row> becomes <mat-row>. 
+-->
+
+<!--
+  length：(1-10 of 25684)資料的總筆數，有這個筆數才能夠搭配其他參數算出總共有幾頁等資訊
+  pageIndex：目前的頁碼，從0開始，預設值是0
+  pageSize：items /per page 每頁要呈現幾筆資料，預設值是50  
+  pageSizeOptions：允許切換的每頁資料筆數
+-->
+<mat-paginator
+  #paginator
+  [length]="totalCount"
+  [pageIndex]="0"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 15]"
+>
+</mat-paginator>
+
+<!--
+  [dataSource]="Backend-data"
+  matSort                   <-- directive
+
+  #templateReferenceVariable="matSort"
+  (matSortChange)="changeSort($event)"
+-->
+<mat-table
+  [dataSource]="emailsDataSource"
+  matSort
+  #sortTable="matSort"
+  (matSortChange)="changeSort($event)"
+>
+  <!--
+    ng-container matColumnDef="user"
+      mat-header-cell *matHeaderCellDef <--- mat-tab content header
+      mat-cell *matCellDef              <--- Content 
+  -->
+  <ng-container matColumnDef="user">
+    <mat-header-cell *matHeaderCellDef>Sender</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.user.login }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef>title</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="created_at">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.created_at }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="management">
+    <mat-header-cell *matHeaderCellDef>
+      <strong><i>Management</i></strong>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-button color="primary" (click)="reply(row)">回覆</button>
+      <button mat-button color="warn" (click)="delete(row)">刪除</button>
+    </mat-cell>
+  </ng-container>
+
+  <!-- HeaderRow and Row Declarations -->
+  <!--
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+  -->
+
+  <!-- 
+    Each element in matHeaderRowDef corresponds to matColumnDef 
+    to Display the matHeaderColumnDef
+  -->
+  <mat-header-row
+    *matHeaderRowDef="['user', 'title', 'created_at', 'management']"
+  ></mat-header-row>
+
+  <!-- To display mat-cell's content-->
+  <mat-row
+    *matRowDef="
+      let emailRow;
+      columns: ['user', 'title', 'created_at', 'management']
+    "
+  ></mat-row>
+</mat-table>
+
+<!-- ng-template for mat-tab-lable-->
+<!-- backgroundColor & color -->
+<mat-tab-group
+  headerPosition="below"
+  backgroundColor="warn"
+  color="primary"
+  mat-stretch-tabs
+>
+  <!-- mat-stretch-tabs evenly-->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>inbox</mat-icon>
+      Inbox
+    </ng-template>
+    Content of Inbox
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>
+      Settings
+    </ng-template>
+    Settings Menu
+  </mat-tab>
+</mat-tab-group>

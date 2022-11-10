@@ -1,0 +1,78 @@
+<div>
+  <mat-paginator
+    #paginator
+    [length]="totalCount"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 15]"
+  >
+  </mat-paginator>
+
+  <mat-form-field>
+    <input matInput #filter placeholder="Search" />
+  </mat-form-field>
+  <!--
+  [dataSource]="Backend-data"
+  matSort                   <-- directive
+
+  #templateReferenceVariable="matSort"
+  (matSortChange)="changeSort($event)"
+-->
+  <mat-table
+    [dataSource]="emailsDataSource"
+    matSort
+    #sortTable="matSort"
+    (matSortChange)="changeSort($event)"
+  >
+    <!--
+    ng-container matColumnDef="user"
+      mat-header-cell *matHeaderCellDef <--- mat-tab content header
+      mat-cell *matCellDef              <--- Content 
+  -->
+    <ng-container matColumnDef="user">
+      <mat-header-cell *matHeaderCellDef>Sender</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.user.login }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>title</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="created_at">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Date
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.created_at }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="management">
+      <mat-header-cell *matHeaderCellDef>
+        <strong><i>Management</i></strong>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button color="primary" (click)="reply(row)">回覆</button>
+        <button mat-button color="warn" (click)="delete(row)">刪除</button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- HeaderRow and Row Declarations -->
+    <!--
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+  -->
+
+    <!-- 
+    Each element in matHeaderRowDef corresponds to matColumnDef 
+    to Display the matHeaderColumnDef
+  -->
+    <mat-header-row
+      *matHeaderRowDef="['user', 'title', 'created_at', 'management']"
+    ></mat-header-row>
+
+    <!-- To display mat-cell's content-->
+    <mat-row
+      *matRowDef="
+        let emailRow;
+        columns: ['user', 'title', 'created_at', 'management']
+      "
+    ></mat-row>
+  </mat-table>
+</div>

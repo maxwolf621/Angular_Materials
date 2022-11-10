@@ -1,0 +1,73 @@
+<h1>mat-list & mat-nav-list & matsubheader</h1>
+
+<mat-toolbar>
+  <button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+  <p [style.margin-left]="'10px'">header name</p>
+</mat-toolbar>
+<mat-sidenav-container class="sidnav-container">
+  <mat-sidenav
+    class="sidenav"
+    #sidenav
+    mode="push"
+    [(opened)]="opened"
+    (open)="events.push('open!')"
+    (close)="events.push('close!')"
+    fixedTopGap="20"
+    fixedBottomGap="20"
+  >
+    <!-- mat-list -->
+    <mat-list>
+      <h3 matSubheader>mat-list</h3>
+      <a [routerLink]="['/', 'child', 'target1']" mat-list-item>underline1</a>
+      <a [routerLink]="['/', 'child', 'target2']" mat-list-item>underline2</a>
+      <a [routerLink]="['/', 'child', 'target3']" mat-list-item>underlin3</a>
+    </mat-list>
+    <mat-divider></mat-divider>
+
+    <!-- mat-nav-list -->
+    <mat-nav-list>
+      <h3 matSubheader>mat-nav-list</h3>
+      <a [routerLink]="['/', 'child', 'target1']" mat-list-item>nav-list1</a>
+      <a [routerLink]="['/', 'child', 'target2']" mat-list-item>nav-list2</a>
+      <a [routerLink]="['/', 'child', 'target3']" mat-list-item>nav-list3</a>
+      <mat-divider></mat-divider>
+      <!--mat-list-item-->
+      <h3 matSubheader>
+        <mat-icon>chat_bubble</mat-icon>
+        Select Event
+      </h3>
+      <mat-list-item *ngIf="optNew.selected">Message is selected</mat-list-item>
+      <mat-list-item *ngIf="optAds.selected">ads is selected</mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 matSubheader>
+        <mat-icon>settings</mat-icon>
+        Check BOX
+      </h3>
+      <!-- mat-selection-list & mat-list-option-->
+      <mat-selection-list>
+        <mat-list-option [value]="1" selected="true" #optNew
+          >select message</mat-list-option
+        >
+        <mat-list-option [value]="2" #optAds>select ads</mat-list-option>
+      </mat-selection-list>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <!-- matListAvatar -->
+    <h1>matListavatar</h1>
+    <mat-list-item>
+      <button mat-icon-button color="accent">
+        <mat-icon>thumb_up</mat-icon>
+      </button>
+      <img
+        matListAvatar
+        src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Walt_Whitman_-_George_Collins_Cox.jpg"
+        width="80px"
+        height="80px"
+      />
+      <p matLine>matLine : Watt Whitman</p>
+      <span matLine>matLine : Be curious, not judgmental.</span>
+      <!-- Button always at the tail-->
+    </mat-list-item>
+  </mat-sidenav-content>
+</mat-sidenav-container>

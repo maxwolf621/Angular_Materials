@@ -1,0 +1,44 @@
+<h2>expansion-panel & expansion-header</h2>
+<p>expansion-header contains panel-title & panel-descript</p>
+
+<!--                    hide ^         expand panel  disable closing-->
+<mat-expansion-panel hideToggle="true" expanded="true" disabled="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title> panel-title </mat-panel-title>
+    <mat-panel-description> panel-description </mat-panel-description>
+  </mat-expansion-panel-header>
+  <!-- content -->
+  <span [style.text-align]="'center'">content</span>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon>inbox</mat-icon>
+      Inbox
+    </mat-panel-title>
+    <mat-panel-description> 4 New Messages</mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-nav-list>
+    <p matLine>Hey what's up</p>
+    <p matLine>I'm going to sleep</p>
+    <p matLine>The world does not belong to me</p>
+    <p matLine>lol it doesn't make sense</p>
+    <mat-action-row>
+      <button mat-button color="primary">replay</button>
+    </mat-action-row>
+  </mat-nav-list>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon>person</mat-icon>
+      Friends
+    </mat-panel-title>
+    <mat-panel-description> online(2) </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-action-row>
+    <button mat-button color="primary">Setting</button>
+  </mat-action-row>
+</mat-expansion-panel>

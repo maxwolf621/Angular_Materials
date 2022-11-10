@@ -1,0 +1,12 @@
+<ng-container *ngFor="let com of coms">
+  <button
+    class="buttons-layout"
+    mat-raised-button
+    routerLink="{{ com.link }}"
+    color="{{ com.color === 'accent' ? com.color : '' }}"
+  >
+    {{ com.name }}
+  </button>
+</ng-container>
+
+<router-outlet></router-outlet>

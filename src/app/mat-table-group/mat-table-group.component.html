@@ -1,0 +1,31 @@
+<mat-tab-group
+  mat-stretch-tabs
+  backgroundColor="primary"
+  color="accent"
+  [(selectedIndex)]="tabIndex"
+  (focusChange)="tabFocusChange($event)"
+  (selectedIndexChange)="tabSelectedIndexChange($event)"
+  (selectedTabChange)="tabSelectedTabChange($event)"
+>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>inbox</mat-icon>
+      Inbox
+    </ng-template>
+    <!-- insert -->
+    <app-table></app-table>
+  </mat-tab>
+  <mat-tab disabled="true">
+    <ng-template mat-tab-label>
+      <mat-icon>settings</mat-icon>
+      disabled=true
+    </ng-template>
+    disabled=true
+  </mat-tab>
+  <mat-tab label="Inbox">
+    <app-mat-table> </app-mat-table>
+  </mat-tab>
+  <mat-tab label="其他2"></mat-tab>
+  <mat-tab label="其他3"></mat-tab>
+  <mat-tab label="其他4"></mat-tab>
+</mat-tab-group>

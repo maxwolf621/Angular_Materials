@@ -1,0 +1,64 @@
+<h1>grid-list & grid-tile</h1>
+
+<pre>
+grid-list
+  gird-tile
+  gird-tile-header
+  gird-tile-footer
+  /grid-tile
+/grid-list
+</pre>
+
+<p>
+  gutterSize : adjust each tile's gap <br />
+  cols : tiles/each line
+</p>
+<!-- 3 cols in a row -->
+<mat-grid-list fxLayout="column" cols="3" rowHeight="100px" gutterSize="20px">
+  <mat-grid-tile [style]="'background: red'">
+    Tile 1 <br />
+    &lt;-- row height-->
+  </mat-grid-tile>
+  <mat-grid-tile style="background: green"> Tile 2 </mat-grid-tile>
+  <mat-grid-tile style="background: blue"> Tile 3 </mat-grid-tile>
+  <!-- to second row -->
+  <mat-grid-tile style="background: black"> Tile 4 </mat-grid-tile>
+</mat-grid-list>
+
+<h1>rowspan and colspan of tile</h1>
+
+<mat-grid-list cols="3">
+  <mat-grid-tile style="background: red" colspan="2">
+    Tile 1(colspan=2)
+  </mat-grid-tile>
+  <mat-grid-tile style="background: green" rowspan="1">
+    Tile 2 (rowspan=5)
+  </mat-grid-tile>
+  <mat-grid-tile style="background: blue" colspan="2" rowspan="3">
+    Tile 3(colspan=2 rowspan=3)
+  </mat-grid-tile>
+  <mat-grid-tile style="background: black" colspan="2">
+    Tile 4(colspan=2)
+  </mat-grid-tile>
+</mat-grid-list>
+
+<h1>footer and header of tile</h1>
+<mat-grid-list cols="1">
+  <mat-grid-tile style="background: #ff55cc">
+    <mat-grid-tile-header>
+      <h3 mat-line>Menu</h3>
+      <span mat-line>--> side bar</span>
+      <button mat-raised-button color="accent">
+        <mat-icon>list</mat-icon>
+      </button>
+      <!-- place at the right -->
+    </mat-grid-tile-header>
+    <mat-grid-tile-footer>
+      <span mat-line>LAZY</span>
+      <span mat-line>FIZY</span>
+      <span mat-line>DOZY</span>
+      <mat-icon>thumb_up</mat-icon>
+    </mat-grid-tile-footer>
+    tile-content
+  </mat-grid-tile>
+</mat-grid-list>

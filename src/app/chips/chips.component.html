@@ -1,0 +1,55 @@
+<h1>tags</h1>
+
+<!-- chip-list -->
+<mat-chip-list>
+  <!-- chip -->
+  <mat-chip>JavaScript</mat-chip>
+  <mat-chip>Material Design</mat-chip>
+  <mat-chip>Angular Material</mat-chip>
+  <!-- status chip-->
+  <mat-chip [style.background-color]="'red'" selected="true"
+    >selected="true"</mat-chip
+  >
+</mat-chip-list>
+
+<h2>
+  Remove chips/tags via
+  <pre>(remove)=removeFn(event)</pre>
+</h2>
+
+<!--
+  chip cant be deleted
+  <mat-chip removable="false">
+  </mat-chip-list>
+-->
+<mat-chip-list>
+  <mat-chip *ngFor="let tag of tags" (remove)="removeTag(tag)">
+    {{ tag }}
+    <mat-icon matChipRemove>cancel</mat-icon>
+  </mat-chip>
+</mat-chip-list>
+
+<h1>chip-list within form-field</h1>
+
+<mat-form-field>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let tag of tags" (remove)="removeTag(tag)">
+      {{ tag }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+  <input
+    placeholder="placeholder property"
+    [matChipInputFor]="chipList"
+    [matChipInputAddOnBlur]="true"
+    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+    (matChipInputTokenEnd)="addTag($event)"
+  />
+</mat-form-field>
+
+<!-- 
+  [matChipInputFor]：<mat-chip-list> names
+  [matChipInputAddOnBlur]`：add chip on blur
+  [matChipInputSeparatorKeyCodes]：act event binding action via specific keyCodes (CDK's comma, enter etc...)
+  (matChipInputTokenEnd): event binding for Input actions (to .ts)
+-->

@@ -1,0 +1,81 @@
+<h1>side navigation</h1>
+
+<p>properties of mat-sidenav</p>
+<pre>
+ &lt;mat-sidenav #sideNav
+              mode="side"
+              position="start"
+              fixedInViewport="true"
+              fixedTopGap="20"
+              fixedBottomGap="20">
+&lt;/mat-sidenav>
+
+mat-toolbar
+  mat-sidenav-container
+    mat-sidenav : slide's contents
+    mat-sidenav-content：contents outside slide
+  /mat-sidenav-container
+/mat-toolbar
+</pre>
+
+<mat-toolbar>
+  <button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+  <p [style.margin-left]="'10px'">header name</p>
+</mat-toolbar>
+<mat-sidenav-container class="sidnav-container">
+  <mat-sidenav
+    class="sidenav"
+    #sidenav
+    mode="push"
+    [(opened)]="opened"
+    (open)="events.push('open!')"
+    (close)="events.push('close!')"
+    position="end"
+    fixedTopGap="20"
+    fixedBottomGap="20"
+  >
+    Sidenav content
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <h3>check box</h3>
+    <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
+    <h3>button</h3>
+    <p>
+      <button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button>
+    </p>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<h1>drawer</h1>
+
+<pre>
+  mat-xxx-container
+    mat-xxx
+    hostElement for content and drawer.toggle
+  /mat-xxx-container
+</pre>
+
+<!-- use autosize to adjust the size of drawer-->
+<mat-drawer-container class="example-container" autosize>
+  <!-- side bar-->
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller" [style.color]="'gold'">
+      We were together.<br />
+      I forget the rest.
+    </p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+
+  <!-- main content (open the mat-drawer)-->
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      <b
+        >Keep your face always toward the sunshine<br />and shadows will fall
+        behind you.</b
+      >
+    </button>
+  </div>
+</mat-drawer-container>

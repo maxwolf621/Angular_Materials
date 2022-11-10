@@ -1,0 +1,68 @@
+<h1>matToolTips in form-field</h1>
+
+<button mat-raised-button color="accent" (click)="titleTooltip.show()">
+  show up tool tips (delay 0.5s)
+</button>
+<button mat-raised-button color="primary" (click)="titleTooltip.hide()">
+  close tool tips (delay 0.5s)
+</button>
+<mat-form-field>
+  <input
+    matInput
+    placeholder="標題"
+    [(ngModel)]="title"
+    #titleTooltip="matTooltip"
+    matTooltip="this is tool tips"
+    matTooltipPosition="right"
+    matTooltipShowDelay="500"
+    matTooltipHideDelay="500"
+  />
+</mat-form-field>
+
+<h1>snackbar in form-field</h1>
+
+<a href="https://material.angular.io/components/snack-bar/examples"
+  >example for snackbar</a
+>
+
+<!-- message For SnackBar-->
+<div class="snackbar">
+  <mat-form-field appearance="fill">
+    <mat-label>Message</mat-label>
+    <input matInput value="default value" #message />
+  </mat-form-field>
+
+  <!-- Action For SnackBar Dialog-->
+  <mat-form-field appearance="fill">
+    <mat-label>Action</mat-label>
+    <input matInput value="Close" #action />
+  </mat-form-field>
+  <!-- Horizontal Position Selection-->
+  <mat-form-field appearance="fill">
+    <mat-label>Horizontal position</mat-label>
+    <mat-select [(value)]="horizontalPosition">
+      <mat-option value="start">Start</mat-option>
+      <mat-option value="center">Center</mat-option>
+      <mat-option value="end">End</mat-option>
+      <mat-option value="left">Left</mat-option>
+      <mat-option value="right">Right</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- Vertical Position Selection-->
+  <mat-form-field appearance="fill">
+    <mat-label>Vertical position</mat-label>
+    <mat-select [(value)]="verticalPosition">
+      <mat-option value="top">Top</mat-option>
+      <mat-option value="bottom">Bottom</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-stroked-button
+    color="accent"
+    (click)="openSnackBar(message.value, action.value)"
+  >
+    <mat-icon>cancel</mat-icon>
+    Show snack-bar
+  </button>
+</div>
